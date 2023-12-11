@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>my profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div class="container" id="app">
+      <div class="row mt-5">
+        <div class="col-12">
+          <h1>{{ message }}</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <div class="card" style="width: 18rem">
+            <div class="card-header">Menu</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><a href="#!" @click="switchDisplay('profile')">ประวัติ</a></li>
+              <li class="list-group-item"><a href="#!" @click="switchDisplay('like')">ความชอบ</a></li>
+              <li class="list-group-item"><a href="#!" @click="switchDisplay('contact')">ติดต่อ</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="card mb-5" style="width: 100%" v-if="flag_profile">
+            <img src="https://s.isanook.com/fi/0/fp/388/1942797/p_sport(870).jpg?ip/crop/w268h151/q80/jpg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <p class="h1">Phisan Sookkhee</p>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+
+          <div class="card mb-5" style="width: 100%" v-if="flag_like">
+            <img src="https://s.isanook.com/fi/0/fp/388/1942417/sex.jpg?ip/crop/w268h151/q80/jpg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <p class="h1">ความชอบ</p>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+
+          <div class="card mb-5" style="width: 100%" v-if="flag_contact">
+            <img src="https://s.isanook.com/fi/0/fp/388/1942545/tagline-template-update-202.jpg?ip/crop/w268h151/q80/jpg" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <p class="h1">ติดต่อ</p>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const { createApp, ref } = Vue;
+
+    createApp({
+      data() {
+        return {
+          message: "My Profile Page",
+          flag_profile: true,
+          flag_like: false,
+          flag_contact: false,
+        };
+      },
+      methods: {
+        switchDisplay(show) {
+          this.flag_profile = false;
+          this.flag_like = false;
+          this.flag_contact = false;
+
+          if (show == "profile") {
+            this.flag_profile = true;
+          }
+          //
+          else if (show == "like") {
+            this.flag_like = true;
+          }
+          //
+          else if (show == "contact") {
+            this.flag_contact = true;
+          }
+        },
+      },
+    }).mount("#app");
+  </script>
+</html>
