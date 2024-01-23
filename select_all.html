@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>โชว์ตัวเลือก</h1>
+
+<form action="/action_page.php">
+  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+  <label for="vehicle1">ฉันมีจักรยานยนต์</label><br>
+  <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+  <label for="vehicle2">ฉันมีจักรรถยนต์</label><br>
+  <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+  <label for="vehicle3">ฉันมีเรือ</label><br><br>
+
+  <input type="button" value="Select All" onclick="selectAll()">
+  <input type="button" value="Deselect All" onclick="deselectAll()"><br><br>
+
+  <input type="submit" value="enter">
+</form>
+
+<script>
+  function selectAll() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+      checkbox.checked = true;
+    });
+  }
+
+  function deselectAll() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+      checkbox.checked = false;
+    });
+  }
+</script>
+
+</body>
+</html
