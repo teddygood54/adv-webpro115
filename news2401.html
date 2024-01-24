@@ -57,6 +57,11 @@
             height: auto;
             margin-top: 10px;
         }
+        a {
+            color: #222;
+            text-align: right;
+            text-decoration: dashed;
+        }
 
         button:hover {
             text-decoration: underline;
@@ -73,6 +78,7 @@
                     <img :src="article.image" alt="รูปภาพข่าว">
                     <h2>{{ article.title }}</h2>
                     <p style="background-color: burlywood;" > {{ formatDate(article.publishedAt) }}</p>
+                    <a>reporter</a>
                     <button onclick= "" >Read the news to fill</button>
                    
                 </li>
@@ -89,7 +95,7 @@
             },
             methods: {
                 formatDate(dateString) {
-                    const options = { year: 'numeric', month: 'long', day: 'numeric', };
+                    const options = {  weekday: 'long',   day: 'numeric', month: 'long', year: 'numeric', };
                     return new Date(dateString).toLocaleDateString('en-EN', options);
                 }
             },
