@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>News App</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #app {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #222;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 30px;
+            background-color: #c2c2c2;
+            border-radius: 20px;
+        }
+
+        button {
+            color: #fff;
+            background-color: #222;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        p {
+            color: #000000;
+            text-align: right;
+            text-decoration: dashed;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <h1 style="text-align: center;" >NEWS ONLINE</h1>
+            <ul>
+                <li v-for="article in articles" :key="article.title">
+                    <img :src="article.image" alt="รูปภาพข่าว">
+                    <h2>{{ article.title }}</h2>
+                    <p style="background-color: burlywood;" > {{ formatDate(article.publishedAt) }}</p>
+                    <button onclick= "window.open('{{ article.url }}', '_blank')" >Read the news to fill</button>
+                   
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    articles: []
+                }
+            },
+            methods: {
+                formatDate(dateString) {
+                    const options = { year: 'numeric', month: 'long', day: 'numeric', };
+                    return new Date(dateString).toLocaleDateString('en-EN', options);
+                }
+            },
+            mounted() {
+                axios({
+                    method: "get",
+                    url: "https://gnews.io/api/v4/search?q=example&lang=en&country=th&max=10&apikey=676a3a3407beb42416f64dba022f3208"
+                }).then((response) => {
+                    this.articles = response.data.articles;
+                    console.log(response.status);
+                })
+            },
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
