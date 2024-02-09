@@ -52,12 +52,24 @@
                 },
                 bookTicket() {
                     if (this.selectedSeat) {
-                        window.location.href = "payment.html?seat=" + this.selectedSeat;
+                        // เก็บเลขที่นั่งที่ถูกเลือกไว้ในตัวแปร selectedSeat
+                        const selectedSeat = this.selectedSeat;
+
+                        // ส่งไปยังหน้า Payment.html โดยใส่เลขที่นั่งใน query parameter
+                        window.location.href = "payment.html?seat=" + selectedSeat;
+                    } else {
+                        alert('Please select a seat first');
+                    }
+                    if (this.selectedSeat) {
+                        // เก็บเลขที่นั่งที่ถูกเลือกไว้ใน localStorage
+                        localStorage.setItem('selectedSeat', this.selectedSeat);
+
+                        // ส่งไปยังหน้า Confirmation.html
+                        window.location.href = "confirmation.html";
                     } else {
                         alert('Please select a seat first');
                     }
                 }
-
             }
         });
 

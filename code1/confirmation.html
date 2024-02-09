@@ -15,27 +15,42 @@
     <main>
         <section>
             <h2>Confirmation</h2>
-            <p>You have successfully booked seat: {{ seat }}</p>
+            <p>You have successfully booked seat: <span id="seat"></span></p>
+            <canvas id="receiptCanvas" width="400" height="200"></canvas>
         </section>
     </main>
     <footer>
-        <p>&copy; 2023 Concert Ticket Booking</p>
+        <p> 2023 Concert Ticket Booking</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const seat = urlParams.get('seat');
+        const selectedSeat = localStorage.getItem('selectedSeat');
 
-        const app = Vue.createApp({
-            data() {
-                return {
-                    seat: seat
-                };
-            }
-        });
+        document.getElementById('seat').textContent = seat;
 
-        app.mount('body');
+        const username = localStorage.getItem('username');
+
+        const canvas = document.getElementById('receiptCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // เขียนข้อมูลใบเสร็จลงบน Canvas
+        ctx.font = '20px Arial';
+        ctx.fillText('Username: ' + username, 20, 30);
+        ctx.fillText('Seat: ' + seat, 20, 60);
+        ctx.fillText('Date: ' + new Date().toLocaleDateString(), 20, 90);
+
+        // สร้าง URL ของภาพ PNG จาก Canvas
+        const imageURL = canvas.toDataURL();
+
+        // สร้าง Element รูปภาพ
+        const image = new Image();
+        
+
+        // เพิ่ม Element รูปภาพลงในเอกสาร
+        document.body.appendChild(image);
     </script>
 </body>
 

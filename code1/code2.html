@@ -4,65 +4,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Concert Ticket Booking</title>
+    <title>Login</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            /* เพิ่มการจัดระเบียบเป็นคอลัมน์ */
+        }
+
+        header,
+        footer {
+            background-color: #0d0491;
+            /* เพิ่มสีพื้นหลัง */
+            color: white;
+            /* เพิ่มสีข้อความ */
+            padding: 10px 0;
+            /* เพิ่มขอบบนและล่าง */
+            text-align: center;
+        }
+
+        .container {
+            text-align: center;
+            flex-grow: 1;
+            /* ให้ส่วนของหน้า login ขยายเต็มพื้นที่ในส่วนของหน้าเว็บ */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form {
+            width: 300px;
+            /* ปรับขนาดฟอร์ม */
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <h1>Concert Ticket </h1>
+        <h1>Login</h1>
     </header>
-    <main id="app">
-        <section id="seating-plan">
-            <h2 style="text-align: center;">Seating Plan</h2>
-            <div class="seat-row" v-for="(row, index) in seatingPlan" :key="index">
-                <div class="seat" v-for="(seat, seatIndex) in row" :key="seatIndex"
-                    @click="toggleSeat(index, seatIndex)">
-                    {{ seat }}
-                </div>
+    <div class="container">
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
             </div>
-        </section>
-        <section id="booking-details">
-            <h2>Booking Details</h2>
-            <p>Selected Seat: {{ selectedSeat }}</p>
-            <button @click="bookTicket">Book Ticket</button>
-        </section>
-    </main>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
     <footer>
-        <p> 2023 Concert Ticket </p>
+        <p> 2023 Concert Ticket Booking</p>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
     <script>
-        const app = Vue.createApp({
-            data() {
-                return {
-                    seatingPlan: [
-                        ['A1', 'A2', 'A3', 'A4', 'A5'],
-                        ['B1', 'B2', 'B3', 'B4', 'B5'],
-                        ['C1', 'C2', 'C3', 'C4', 'C5'],
-                        ['D1', 'D2', 'D3', 'D4', 'D5'],
-                    ],
-                    selectedSeat: null
-                };
-            },
-            methods: {
-                toggleSeat(rowIndex, seatIndex) {
-                    this.selectedSeat = this.seatingPlan[rowIndex][seatIndex];
-                },
-                bookTicket() {
-                    if (this.selectedSeat) {
-                        window.location.href = "payment.html?seat=" + this.selectedSeat;
-                    } else {
-                        alert('Please select a seat first');
-                    }
-                }
+        // เพิ่ม event listener เพื่อจัดการเหตุการณ์การ submit ฟอร์ม
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // ไม่ให้ฟอร์มส่งข้อมูล
 
-                
-            }
+            // ดึงค่า username จากฟอร์ม
+            var username = document.getElementById("username").value;
+
+            // เก็บชื่อผู้ใช้ใน Local Storage เพื่อใช้ในการสร้างใบเสร็จ
+            localStorage.setItem("username", username);
+
+            // เปลี่ยนหน้าไปที่ index.html
+            window.location.href = "index.html";
         });
-
-        app.mount('#app');
     </script>
 </body>
 
