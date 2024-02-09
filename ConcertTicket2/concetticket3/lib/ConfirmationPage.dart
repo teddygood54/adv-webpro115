@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ConfirmationPage extends StatelessWidget {
+class Confirmation extends StatelessWidget {
   final String seat;
 
-  ConfirmationPage({required this.seat});
+  Confirmation({required this.seat});
 
   @override
   Widget build(BuildContext context) {

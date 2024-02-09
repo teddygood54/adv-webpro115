@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/', // Define the initial route
      routes: {
         '/': (context) => SeatingPlanPage(),
-        '/payment': (context) => Paymen(),
-        '/confirmation': (context) => ConfirmationPage(
+        '/payment': (context) => Payment(),
+        '/confirmation': (context) => Confirmation(
               seat: '',
             ),
       },

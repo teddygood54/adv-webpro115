@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'confirmationpage.dart'; // Import ConfirmationPage
 
-class Paymen extends StatelessWidget {
-  const Paymen({Key? key}) : super(key: key);
+class Payment extends StatelessWidget {
+  const Payment({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +25,17 @@ class Paymen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              // สำหรับการเลือกไฟล์ภาพ
+              // TODO: Implement file picker
             },
             child: Text('Choose File'),
           ),
           ElevatedButton(
             onPressed: () {
-              // สำหรับยืนยันการชำระเงิน
-              Navigator.pushNamed(context, '/confirmation');
+              // Navigate to ConfirmationPage when payment is confirmed
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Confirmation(seat: '',)),
+              );
             },
             child: Text('Confirm Payment'),
           ),
@@ -43,8 +47,8 @@ class Paymen extends StatelessWidget {
             ),
           ),
           Image.asset(
-            'assets/payment_qr_code.png', // เปลี่ยนเส้นทางไปยังรูปภาพตามเส้นทางที่เหมาะสม
-            width: 200, // ปรับขนาดของรูปภาพตามที่ต้องการ
+            'assets/payment_qr_code.png', // รูปภาพ QR Code ที่อาจจะมีให้
+            width: 200,
             height: 200,
           ),
           Padding(
