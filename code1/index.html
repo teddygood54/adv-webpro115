@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concert Ticket Booking</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Concert Ticket </h1>
+    </header>
+    <main id="app">
+        <section id="seating-plan">
+            <h2 style="text-align: center;">Seating Plan</h2>
+            <div class="seat-row" v-for="(row, index) in seatingPlan" :key="index">
+                <div class="seat" v-for="(seat, seatIndex) in row" :key="seatIndex"
+                    @click="toggleSeat(index, seatIndex)">
+                    {{ seat }}
+                </div>
+            </div>
+        </section>
+        <section id="booking-details">
+            <h2>Booking Details</h2>
+            <p>Selected Seat: {{ selectedSeat }}</p>
+            <button @click="bookTicket">Book Ticket</button>
+        </section>
+    </main>
+    <footer>
+        <p> 2023 Concert Ticket </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    seatingPlan: [
+                        ['A1', 'A2', 'A3', 'A4', 'A5'],
+                        ['B1', 'B2', 'B3', 'B4', 'B5'],
+                        ['C1', 'C2', 'C3', 'C4', 'C5'],
+                        ['D1', 'D2', 'D3', 'D4', 'D5'],
+                    ],
+                    selectedSeat: null
+                };
+            },
+            methods: {
+                toggleSeat(rowIndex, seatIndex) {
+                    this.selectedSeat = this.seatingPlan[rowIndex][seatIndex];
+                },
+                bookTicket() {
+                    if (this.selectedSeat) {
+                        window.location.href = "payment.html?seat=" + this.selectedSeat;
+                    } else {
+                        alert('Please select a seat first');
+                    }
+                }
+
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #payment-qr-code {
+             width: 2in;
+            height: 2in;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Payment Page</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Payment Details</h2>
+            <p>Please upload proof of payment:</p>
+            <input type="file" accept="image/*" @change="uploadPayment">
+            <button @click="confirmPayment">ยืนยันหลักฐาน</button>
+        </section>
+        <section>
+            <h2>Payment QR Code</h2>
+            <img id="payment-qr-code" src="payment_qr_code.png" alt="Payment QR Code">
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Concert Ticket Booking</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            methods: {
+                uploadPayment(event) {
+                    const file = event.target.files[0];
+                    // ทำงานกับไฟล์ภาพที่อัปโหลด
+                },
+                confirmPayment() {
+                    // ทำการย้ายไปยังหน้า confirmation.html
+                    window.location.href = "confirmation.html";
+                }
+            }
+        });
+
+        app.mount('body');
+    </script>
+</body>
+
+</html>
